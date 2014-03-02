@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h1>Add a New Transaction</h1>
+</div>
+
+<form action="/Transactions/Create">
+  <div class="form-group">
+    <label>Enter a transaction title:</label>
+    <input name="title" type="text" class="form-control input-md" placeholder="Example: E-book purchase">
+  </div>
+  <div class="form-group">
+    <label>Enter a transaction decription:</label>
+    <textarea name="description" class="form-control input-md"  rows="5" ></textarea>
+  </div>
+  <div class="form-group">
+    <label>Enter a vendor:</label>
+    <input name="vendor" type="text" class="form-control input-md" placeholder="Example: Amazon">
+  </div>
+  <div class="form-group">
+    <label>Enter the price:</label>
+    <input name="price" type="text" class="form-control input-md"placeholder="Enter amount in exact dollars only">
+  </div>
+  <div class="form-group"> 
+    <label>Enter transaction category:</label>
+    <select name="category">
+      <option value="401K">401K Retirement</option>
+      <option value="Savings">Personal Savings</option>
+      <option value="Loans">Student Loans</option>
+      <option value="Rent">Rent</option>
+      <option value="Utilities">Utilities</option>
+      <option value="Cable">Cable/Internet</option>
+      <option value="Phone">Phone</option>
+      <option value="Maid">Maid/Cleaning Supplies</option>
+      <option value="Groceries">Groceries</option>
+      <option value="Dining">Dining/Eating Out</option>
+      <option value="Entertainment">Entertainment</option>
+      <option value="Transportation">Transportation</option>
+      <option value="Misc">Misc Purchases</option>
+    </select>
+    <input name="date" type="hidden" class="form-control input-md" value="<%=Time.now.strftime("%m/%d/%Y")%>">
+    <br></br>
+  <button type="submit" class="btn btn-success btn-md">Submit</button>
+  or
+  <a href="/products">Cancel</a>
+</form>
