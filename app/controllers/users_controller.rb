@@ -12,8 +12,9 @@ user.pwd=params[:pwd]
 user.income=params[:income]
 user.net_worth=params[:net]
 user.save
+session[:id]=user.id
 
-redirect_to "users#show", notice:"new user created"
+redirect_to "/users/show", notice:"new user created"
 
 end
 

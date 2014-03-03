@@ -3,7 +3,11 @@ class AccountsController < ApplicationController
   end
 
   def transactions
-  	@trans_list=Transaction.all.order('title asc')
+  	if session[:id].present?
+      @trans_list=Transaction.order('title asc').where(:user_id=>session[:id])
+    else
+      redirect_to root_url, notice: "Please login to view transactions"
+    end
   end
 
   def budget

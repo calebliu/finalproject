@@ -14,8 +14,15 @@ get "/Transactions" => "accounts#transactions"
 get "/Budget" => "accounts#budget"
 get "/Goals" => "accounts#goals"
   
+#Transactin routes
+
+#Create
 get "/Transactions/New" => "transactions#new"
 get "/Transactions/Create" => "transactions#create"
+
+#Destroy
+get "/transactions/:trans_id/delete" => "transactions#destroy"
+
 
 get "/Budget/Create" => "accounts#budgetcreate"
 

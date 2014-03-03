@@ -14,6 +14,11 @@
 	</div>
 	<br><a href="/Transactions/New">Add Item</a>
 	<br></br>
+	
+	<% if @trans_list.nil? || @trans_list.empty?%>
+		<p>There are no transactions associated with this user</p>
+	<%else%>
+
 	<table class="table table-bordered table-striped">
 		<tr>
 			<th>Date</th>
@@ -21,8 +26,10 @@
 			<th>Category</th>
 			<th>Vendor</th>
 			<th>Amount</th>
+			<th>Delete Transaction</th>
 		</tr>
 
+	
 		<% @trans_list.each do |trans| %>
 		<tr>
 			<td><%= trans.date %></td>
@@ -30,8 +37,10 @@
 			<td><%= trans.category %></td>
 			<td><%= trans.vendor %></td>
 			<td><%= trans.amount %></td>
+			<td><%= link_to "Delete", "/transactions/#{trans.id}/delete" %></td>
 		</tr>
 		<% end %>
+	<%end%>
 	</table>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
