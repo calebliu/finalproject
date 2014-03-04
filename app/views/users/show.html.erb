@@ -3,3 +3,12 @@
 <h1> Welcome, <%= user.first_name%></h1>
 
 <p>Member since <%= user.created_at%></p>
+
+<% if Budget.find_by(:user_id => session[:id]).present?%>
+
+	<% budget = Budget.find_by(:user_id => session[:id])%>
+	<p>Your current monthly income of $<%= budget.total %> is allocated as follows:</p>
+
+<% else %>
+	<p>You haven't yet created a monthly budget; you can do so <a href="/Budget">here</a></p>
+<%end%>

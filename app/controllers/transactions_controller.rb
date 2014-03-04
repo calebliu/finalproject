@@ -8,7 +8,7 @@ def create
 	trans.title=params["title"]
 	trans.description=params["description"]
 	trans.vendor=params["vendor"]
-	trans.category=params["category"]
+	trans.category_id=Category.find_by(:name => params[:category]).id
 	trans.amount=params["price"]
 	trans.date=params["date"]
 	trans.user_id=params["user"]

@@ -1,52 +1,88 @@
 <h1>Account Dashboard</h1>
  <div class="container">
       <!-- Example row of columns -->
+      
+      <%if session[:id].present?%>
+				<%if Budget.find_by(:user_id => session[:id]).present? %>
+			        <%@budget = Budget.find_by(:user_id => session[:id])%>
+
       <div class="row">
         <div class="col-md-6">
 			<h3>Monthly Budget <small>How much more you can spend this month</small></h3>
-			<div class="thumbnail">
-			<img data-src="holder.js/300x200" alt="...">
+			
 			<div class="caption">
 			<div class="panel panel-default">
-				<div class="panel-body">Total Budget: $XXX</div>
+				
+			
+
+				<div class="panel-body">Total Budget: $<%=@budget.total%></div>
 				<div class="panel-body">
-					Amount Spent: $XXX
+					Amount Spent: $<%=@trans_list.sum("amount")%>
 				</div>
 				<div class="panel-heading">
-					<strong>Amount Remaining: $XXX</strong>
+					<strong>Amount Remaining: $<%=@budget.total - @trans_list.sum("amount")%></strong>
 				</div>
 				</div>
+			
 			</div>
-			</div>
-			<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-			<div class="alert alert-warning">You've spent too much this month!</div>
+			<p><a class="btn btn-default" href="/Transactions" role="button">View details &raquo;</a></p>
+			<% if @trans_list.sum("amount") > @budget.total %>
+				<div class="alert alert-warning">You've spent too much this month!</div>
+			<% else %>
+				<div class="alert">You're still within budget - good job!</div>
+			<% end %>
 		</div>
 		<div class="col-md-6">
 			<h3>Spending Details</h3>
-			<div class="thumbnail">
-			<img data-src="holder.js/300x200" alt="...">
+			
 			<div class="caption">
 			<table class="table">
 				<tr>
 					<th>Category</th>
-					<th>(+/-) Budget</th>
+					<th>Spending Month-to-Date</th>
 				</tr>
-				<tr>
+				
+				<% Category.all.each do |category| %>
+					<tr>
+					<td><%=category.name.titleize%></td>
+					<td>$<%=@trans_list.where(:category_id => category.id).sum("amount")%></td>
+					</tr>
+				<% end %>
+
+
+				<!-- <tr>
 					<td>Category 1</td>
 					<td>$XXX</td>
 				</tr>
 				<tr class="danger">
 					<td>Category 2</td>
 					<td>($XXX)</td>
-				</tr>
+				</tr> -->
+			
+
+
 			</table>
+			
 			</div>
-			</div>
-			<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+			<p><a class="btn btn-default" href="/Transactions" role="button">View details &raquo;</a></p>
         </div>
       </div>
 	
+	<%else%>
+	<p> You haven't created a budget yet. Would you like to <strong><a href="/Budget">do so now</a></strong>?</p>
+
+	<%end%>
+<%else%>
+			        
+<p> Please <a href="/login">Sign In</a> to View your Account Information</p>
+			      
+<%end%>
+
       <hr>
+
+      
+
+
 
       <footer>
         <p>&copy; SaveMore 2013</p>
@@ -56,3 +92,4 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+

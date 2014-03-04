@@ -34,7 +34,8 @@
 		<tr>
 			<td><%= trans.date %></td>
 			<td><%= trans.title %></td>
-			<td><%= trans.category %></td>
+			<% cat = Category.all.find_by(:id => trans.category_id) %>
+			<td><%= cat.name %></td>
 			<td><%= trans.vendor %></td>
 			<td><%= trans.amount %></td>
 			<td><%= link_to "Delete", "/transactions/#{trans.id}/delete" %></td>

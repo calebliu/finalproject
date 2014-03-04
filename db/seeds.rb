@@ -1,68 +1,30 @@
 Transaction.destroy_all
 puts "There are now #{Transaction.count} transactions in the db"
 
-Budget.destroy_all
-budget_default = [  { :user_id => 1,
-                      :category => '401K',
-                      :amount => 1000 
-                    },
-                    { :user_id => 1,
-                      :category => 'Savings',
-                      :amount => 1000 
-                    },
-                    { :user_id => 1,
-                      :category => 'Loans',
-                      :amount => 500 
-                    },
-                    { :user_id => 1,
-                      :category => 'Rent',
-                      :amount => 2500 
-                    },
-                    { :user_id => 1,
-                      :category => 'Utilties',
-                      :amount => 150 
-                    },
-                    { :user_id => 1,
-                      :category => 'Cable',
-                      :amount => 100 
-                    },
-                    { :user_id => 1,
-                      :category => 'Phone',
-                      :amount => 100 
-                    },
-                    { :user_id => 1,
-                      :category => 'Maid',
-                      :amount => 100 
-                    },
-                    { :user_id => 1,
-                      :category => 'Groceries',
-                      :amount => 400 
-                    },
-                    { :user_id => 1,
-                      :category => 'Dining',
-                      :amount => 400 
-                    },
-                    { :user_id => 1,
-                      :category => 'Entertainment',
-                      :amount => 400 
-                    },
-                    { :user_id => 1,
-                      :category => 'Transportation',
-                      :amount => 100 
-                    },
-                    { :user_id => 1,
-                      :category => 'Misc',
-                      :amount => 300 
-                    },
+Category.destroy_all
 
-                  ]
-
-budget_default.each do |budget|
-	b = Budget.new
-	b.user_id = budget[:user_id]
-	b.category = budget[:category]
-	b.amount = budget[:amount]
-	b.save
+["retirement", "savings", "loans", "rent", "utilities","cable","phone","cleaning","groceries","dining","entertainment","transportation","clothes","misc"].each do |category_name|
+        c = Category.new
+        c.name = category_name
+        c.save
 end
 
-puts "There are now #{Budget.count} budget items"
+puts "There are now #{Category.count} categories in the db"
+
+Budget.destroy_all
+
+User.destroy_all
+
+user = User.new
+user.first_name = "John"
+user.last_name = "Doe"
+user.income = 100000
+user.net_worth = 1000000
+user.have_goals=1
+user.have_budget=1
+user.login="johndoe"
+user.pwd="password"
+user.save
+
+puts "All users have been purged. Use user:#{user.login} and password:#{user.pwd} to test functionality"
+
