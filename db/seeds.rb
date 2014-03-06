@@ -11,6 +11,15 @@ end
 
 puts "There are now #{Category.count} categories in the db"
 
+Vendor.destroy_all
+["Amazon","eBay","Trader Joe's", "Whole Foods","CVS","Best Buy"].each do |vend_name|
+	v=Vendor.new
+	v.name = vend_name
+	v.save
+end
+
+puts "There are nw #{Vendor.count} vendors populated in the db"
+
 Budget.destroy_all
 
 User.destroy_all
