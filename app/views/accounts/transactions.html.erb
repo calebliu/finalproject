@@ -1,24 +1,12 @@
 <h1>Transactions</h1>
-	<br></br>
 	
-	<div class="btn-group">
-	<p>Sort By:</p>
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		Date <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" role="menu">
-		<li><a href="#">Category</a></li>
-		<li><a href="#">Amount</a></li>
-		<li><a href="#">Vendor</a></li>
-	  </ul>
-	</div>
-	<br><a href="/Transactions/New">Add Item</a>
+<div class="container"
 	<br></br>
 	
 	<% if @trans_list.nil? || @trans_list.empty?%>
-		<p>There are no transactions associated with this user</p>
+		<p>There are no transactions associated with this user: <a href="/Transactions/New">Add a Transaction</a></p>
 	<%else%>
-
+		<br><a href="/Transactions/New">Add Transaction</a></br>
 	<table class="table table-bordered table-striped">
 		<tr>
 			<th>Date</th>
@@ -35,8 +23,8 @@
 			<td><%= trans.date %></td>
 			<td><%= trans.title %></td>
 			<% cat = Category.all.find_by(:id => trans.category_id) %>
-			<td><%= cat.name %></td>
-			<td><%= trans.vendor %></td>
+			<td><%= cat.name.titleize%></td>
+			<td><%= Vendor.find_by(:id => trans.vend_id).name %></td>
 			<td><%= trans.amount %></td>
 			<td><%= link_to "Delete", "/transactions/#{trans.id}/delete" %></td>
 		</tr>
@@ -47,3 +35,5 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+ </div>

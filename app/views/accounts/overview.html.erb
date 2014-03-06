@@ -1,7 +1,17 @@
 <h1>Account Dashboard</h1>
  <div class="container">
       <!-- Example row of columns -->
-      
+     
+
+      <div class="container">
+    <% if notice.present? %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= notice %>
+      </div>
+    </div>
+    <% end %>
+
       <%if session[:id].present?%>
 				<%if Budget.find_by(:user_id => session[:id]).present? %>
 			        <%@budget = Budget.find_by(:user_id => session[:id])%>
@@ -77,6 +87,8 @@
 <p> Please <a href="/login">Sign In</a> to View your Account Information</p>
 			      
 <%end%>
+
+	
 
       <hr>
 

@@ -1,14 +1,88 @@
 <% user = User.find_by(:id => session[:id])%>
 
-<h1> Welcome, <%= user.first_name%></h1>
-
-<p>Member since <%= user.created_at%></p>
-
+<h1> Welcome, <%= user.first_name%> <small>Member since <%= user.created_at%></small></h1>
+<br>
+<br>
 <% if Budget.find_by(:user_id => session[:id]).present?%>
 
 	<% budget = Budget.find_by(:user_id => session[:id])%>
+
+<div class="container">
 	<p>Your current monthly income of $<%= budget.total %> is allocated as follows:</p>
+
+<table class='table'>
+	<tr>
+		<th>Category</th>
+		<th>Amount</th>
+	</tr>
+	<tr>
+		<td>Retirement</td>
+		<td>$ <%=budget.total * budget.retirement / 100 %></td>
+	</tr>
+	<tr>
+		<td>Savings</td>
+		<td>$ <%=budget.total * budget.savings / 100 %></td>
+	</tr>
+	<tr>
+		<td>Loans</td>
+		<td>$ <%=budget.total * budget.loans / 100 %></td>
+	</tr>
+	<tr>
+		<td>Rent</td>
+		<td>$ <%=budget.total * budget.rent / 100 %></td>
+	</tr>
+	<tr>
+		<td>Utilities</td>
+		<td>$ <%=budget.total * budget.utilities / 100 %></td>
+	</tr>
+	<tr>
+		<td>Cable</td>
+		<td>$ <%=budget.total * budget.cable / 100 %></td>
+	</tr>
+	<tr>
+		<td>Phone</td>
+		<td>$ <%=budget.total * budget.phone / 100 %></td>
+	</tr>
+	<tr>
+		<td>Cleaning</td>
+		<td>$ <%=budget.total * budget.cleaning / 100 %></td>
+	</tr>
+	<tr>
+		<td>Groceries</td>
+		<td>$ <%=budget.total * budget.groceries / 100 %></td>
+	</tr>
+	<tr>
+		<td>Dining</td>
+		<td>$ <%=budget.total * budget.dining / 100 %></td>
+	</tr>
+	<tr>
+		<td>Entertainment</td>
+		<td>$ <%=budget.total * budget.entertainment / 100 %></td>
+	</tr>
+	<tr>
+		<td>Transportation</td>
+		<td>$ <%=budget.total * budget.transportation / 100 %></td>
+	</tr>
+	<tr>
+		<td>Clothes</td>
+		<td>$ <%=budget.total * budget.clothes / 100 %></td>
+	</tr>
+	<tr>
+		<td>Misc</td>
+		<td>$ <%=budget.total * budget.misc / 100 %></td>
+	</tr>
+	<tr class="footer">
+		<td>Total</td>
+		<td>$<%=budget.total * 1.00%></td>
+	</tr>
+</table>
+	
+
+</table>
+
+
 
 <% else %>
 	<p>You haven't yet created a monthly budget; you can do so <a href="/Budget">here</a></p>
 <%end%>
+</div>

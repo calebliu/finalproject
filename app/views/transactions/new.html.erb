@@ -13,21 +13,35 @@
     <label>Enter a transaction decription:</label>
     <textarea name="description" class="form-control input-md"  rows="5" ></textarea>
   </div>
-  <div class="form-group">
+  
+  <label>Select vendor:</label>
+    <select name="vendor">
+      
+      <% Vendor.all.order(:name).each do |vendor| %>
+
+        <option value="<%=vendor.id%>"><%=vendor.name%></option>
+      <% end %>
+    </select>
+    <p>Don't see the vendor? At it to our <a href="/Vendor">list</a></p>
+
+
+<!--   <div class="form-group">
     <label>Enter a vendor:</label>
     <input name="vendor" type="text" class="form-control input-md" placeholder="Example: Amazon">
-  </div>
+  </div> -->
+
+
   <div class="form-group">
     <label>Enter the price:</label>
     <input name="price" type="text" class="form-control input-md"placeholder="Enter amount in exact dollars only">
   </div>
   <div class="form-group"> 
-    <label>Enter transaction category:</label>
+    <label>Select transaction category:</label>
     <select name="category">
       
       <% Category.all.each do |category| %>
 
-        <option value="<%=category.name%>"><%=category.name%></option>
+        <option value="<%=category.id%>"><%=category.name%></option>
       <% end %>
     </select>
     <br>
@@ -36,7 +50,7 @@
     <br></br>
   <button type="submit" class="btn btn-success btn-md">Submit</button>
   or
-  <a href="/products">Cancel</a>
+  <a href="/Transactions">Cancel</a>
   <input type="hidden" name="user" value="<%=session[:id]%>">
 </form>
 

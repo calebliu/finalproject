@@ -9,12 +9,22 @@ get "/" => "accounts#overview"
 
 root "accounts#overview"
 
+
+#Account routes
 get "/Dashboard" => "accounts#overview"
 get "/Transactions" => "accounts#transactions"
 get "/Budget" => "accounts#budget"
 get "/Goals" => "accounts#goals"
+get "/Stocks" => "accounts#stocks"
   
-#Transactin routes
+#Stock route
+get "/stocksearch" => "stocks#search"
+
+#Vendor route
+get "/Vendor" => "vendors#new"
+get "/Vendor/Create" => "vendors#create"
+
+#Transaction routes
 
 #Create
 get "/Transactions/New" => "transactions#new"

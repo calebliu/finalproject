@@ -54,21 +54,17 @@
     <ul class="nav navbar-nav">
        <li><a href="/Dashboard">Overview</a></li>
 	     <li><a href="/Transactions">Transactions</a></li>
-       <li><a href="/Budget">Budget</a></li>
-	     <li><a href="/Goals">Goals</a></li>
+       <li><a href="/Budget">Update Budget</a></li>
+	     <li><a href="/Stocks">Stock Quotes</a></li>
     </ul>
-    <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+
+
 
     <ul class="nav navbar-nav navbar-right">
 
     <% user= User.find_by(:id => session[:id]) %>
     <% if user.present? %>
-        <li><a href="/users/show">My Profile</a></li>
+        <li><a href="/users/show">My Profile/Budget</a></li>
         <li><a href="/logout">Sign Out</a></li>
     
     <% else %>
