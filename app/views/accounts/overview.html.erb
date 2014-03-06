@@ -4,7 +4,7 @@
       
       <%if session[:id].present?%>
 				<%if Budget.find_by(:user_id => session[:id]).present? %>
-			        <%@budget = Budget.find_by(:user_id => session[:id])%>
+			       
 
       <div class="row">
         <div class="col-md-6">
@@ -15,18 +15,26 @@
 				
 			
 
-				<div class="panel-body">Total Budget: $<%=@budget.total%></div>
+				<div class="panel-body">Total Budget: $<%=Budget.where(:user_id => session[:id]).sum('total')%></div>
 				<div class="panel-body">
 					Amount Spent: $<%=@trans_list.sum("amount")%>
 				</div>
 				<div class="panel-heading">
-					<strong>Amount Remaining: $<%=@budget.total - @trans_list.sum("amount")%></strong>
+					<strong>Amount Remaining: $<%=Budget.where(:user_id => session[:id]).sum('total') - @trans_list.sum("amount")%></strong>
 				</div>
 				</div>
 			
 			</div>
+
+
+			<%Budget.where(:user_id => session[:id]).each do |b|%>
+			<p>Total<%=b.category_id%>: <%=b.total%></p>
+			<%end%>
+
+
+
 			<p><a class="btn btn-default" href="/Transactions" role="button">View details &raquo;</a></p>
-			<% if @trans_list.sum("amount") > @budget.total %>
+			<% if @trans_list.sum("amount") > Budget.where(:user_id => session[:id]).sum('total') %>
 				<div class="alert alert-warning">You've spent too much this month!</div>
 			<% else %>
 				<div class="alert">You're still within budget - good job!</div>

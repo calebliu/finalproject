@@ -1,0 +1,15 @@
+<table>
+<%Category.all.each do |cat|%>
+<tr>
+<td><%=cat.id%></td>
+<td><%=cat.name%></td>
+</tr>
+<%end%>
+</table>
+
+
+<p><%=@b.find_by(:category_id => "18").total%></p>
+
+<p><% @b.all.each do |b| %></p>
+<p><%=Category.find_by(:id => b.category_id).name%></p>
+<%end%>

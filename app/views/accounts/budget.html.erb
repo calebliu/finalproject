@@ -5,13 +5,20 @@
 	
 	<table class="table">
 	<form action="Budget/Create"
-	<p>enter all budget allocations as percentages (e.g. enter 10% as 10)</p>
-		<tr>
-			<td colspan="4"><label>Monthly Take-home Income:</label></td>
-			<td><input type="number" name="total"></td>
+	<p>enter all budget allocations as dollar amounts (e.g. enter $10 as 10)</p>
+		<tr class="header">
+			<td colspan="6" align="left"><strong>Categories:</strong></td>
 		</tr>
-		
-		<tr class="header"><td colspan="6" align="left"><strong>Savings</strong></td></tr>
+	<% Category.all.each do |cat|%>
+
+		<tr>
+			<td colspan="4" align="left"><%=cat.name.titleize%> </td>
+			<td colspan="2"> <div style="display:none"><p>&nbsp;</p></div>
+			$<input type="number" name="<%=cat.name%>" size="10" maxlength="10" value="0"></td>
+		</tr>
+	<%end%>
+
+		<!-- <tr class="header"><td colspan="6" align="left"><strong>Savings</strong></td></tr>
 		<tr>
 			<td colspan="4" align="left">401K Retirement Fund </td>
 			<td colspan="2"> <div style="display:none"><p>&nbsp;</p></div>
@@ -78,12 +85,12 @@
 			<td colspan="4" align="left">Clothes </td>
 			<td colspan="2"> <div style="display:none"><p>&nbsp;</p></div>
 			%<input type="number" name="inputBox14" size="10" maxlength="10"></td>
-		</tr>
-		<tr>
+		</tr> -->
+		<!-- <tr>
 			<td colspan="4" align="left">Miscellaneous/Other </td>
 			<td colspan="2"> <div style="display:none"><p>&nbsp;</p></div>
 			%<input type="number" name="inputBox15" size="10" maxlength="10"></td>
-		</tr>
+		</tr> -->
 		<input type="hidden" name="id" value="<%=session[:id]%>">
 		<tr><td colspan="4"><button type="submit" class="btn btn-success btn-md">Update</button></td></tr>
 		</form>
